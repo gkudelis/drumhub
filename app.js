@@ -4,11 +4,18 @@ $(function() {
     var bufferLoad = loadBuffers();
     var allSources = [];
 
-    $("#load-new").click(function() {
+    $("#load-new").click(cleanRunRepo);
+    $("#github-link").on("keyup", function(e) {
+        if (e.keyCode == 13) {
+            cleanRunRepo();
+        }
+    });
+
+    function cleanRunRepo() {
         allSources.map(function(source) { source.disconnect() });
         allSources = [];
         playRepo("https://api.github.com/repos/" + $("#github-link").val() + "/commits");
-    });
+    }
 
     function playRepo(repo) {
         $.when($.get(repo), bufferLoad)
