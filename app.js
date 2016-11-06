@@ -7,10 +7,8 @@ $(function() {
     $("#load-new").click(function() {
         allSources.map(function(source) { source.disconnect() });
         allSources = [];
-        playRepo('https://api.github.com/repos/airbnb/knowledge-repo/commits');
+        playRepo("https://api.github.com/repos/" + $("#github-link").val() + "/commits");
     });
-
-    //var githubFetch = $.get('https://api.github.com/repos/airbnb/knowledge-repo/commits');
 
     function playRepo(repo) {
         $.when($.get(repo), bufferLoad)
